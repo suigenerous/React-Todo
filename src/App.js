@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList'
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -21,16 +22,18 @@ class App extends React.Component {
 
   // change handler
 
-  changeHandler = event => {
-    this.setState({inputStr: event.target.value});
+  changeHandler = (event) => {
+    event.preventDefault();
+    return this.setState({inputStr: event.target.value});
   };  
 
   // onSubmit adds todo to array
 
-  onSubmit = event => {
-    event.preventDefault();
-    const tempDisplayArr = [[...this.displayArr]];
-    return this.setState({displayArr: [tempDisplayArr.push(this.inputStr)]});
+  onSubmit = (todoObj) => {
+    const tempArr = [...this.state.displayArr];
+    tempArr.push(todoObj);
+    this.setState({inputStr: ''});
+    return this.setState({displayArr: tempArr});
   }  
 
   render() {
@@ -41,7 +44,10 @@ class App extends React.Component {
           addDisabled = {this.state.addDisabled}
           changeHandler = {this.changeHandler}
           inputStr = {this.state.inputStr}
-          handleSubmit = {this.onSubmit}
+          onSubmit = {this.onSubmit}
+        />
+        <TodoList
+          todosArr = {this.state.displayArr}
         />
       </div>
     );
