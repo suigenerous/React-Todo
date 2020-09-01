@@ -10,14 +10,11 @@ class TodoList extends React.Component{
         }
     }
 
-    // set key to date
-
-
     render(){
         return(
             <div>
                {this.props.todosArr.map(todo =>{
-                   return <Todo key = {todo.id} todo = {todo} completed = {todo.completed}/>
+                   return <Todo key = {todo.id} todo = {todo} flagToggler = {this.props.flagToggler}/>
                })}
             </div>
         )

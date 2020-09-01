@@ -8,28 +8,23 @@ class Todo extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            completed: this.props.completed,
+            dummyState: ''
         }
     }
-
-    handleInputChange = (event) => {
-        return this.setState({completed: event.target.checked});
-    }   
-
-    const 
 
     render(){
         return(
             <div className = "todoContainer">
-                <span className = {this.state.completed ? "complete" : "incomplete"}>
+                <span className = {this.props.todo.completed ? "complete" : "incomplete"}>
                     {this.props.todo.text}
                 </span>
-                <input
-                    name="isComplete"
-                    type="checkbox"
-                    checked={this.state.completed}
-                    onChange={this.handleInputChange} 
-                />
+                <button name = {this.props.id} onClick = {(event) =>{
+                    event.preventDefault();
+                    return this.props.flagToggler(this.props.todo)}}
+                >
+                    {this.props.todo.completed ? 'Mark Incomplete' : 'Mark Complete'}
+                </button>
+
             </div>
         )
     }

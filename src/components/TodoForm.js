@@ -8,19 +8,11 @@ class TodoForm extends React.Component{
            dummyValue: '',
         }
     }
-    handleSubmit = (event) =>{
-        event.preventDefault();
-        const tempTodoObj = {
-            id: Date.now(),
-            text: this.props.inputStr,
-            completed: false,
-        }
-        return this.props.onSubmit(tempTodoObj);
-    }
+   
 
     render(){
         return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit}>
             <label>Todo
             <input type="text" value={this.props.inputStr} onChange={this.props.changeHandler} />
             </label>
