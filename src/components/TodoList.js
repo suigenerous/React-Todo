@@ -1,6 +1,5 @@
 import React from 'react';
 import Todo from './Todo';
-import {useEffect} from 'react-dom'
 
 class TodoList extends React.Component{ 
 
@@ -18,7 +17,7 @@ class TodoList extends React.Component{
         return(
             <div>
                {this.props.todosArr.map(todo =>{
-                   return <Todo key = {todo.id} todo = {todo}/>
+                   return <Todo key = {todo.id} todo = {todo} completed = {todo.completed}/>
                })}
             </div>
         )
