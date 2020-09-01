@@ -9,7 +9,7 @@ class App extends React.Component {
 
 
   // constructor 
-  
+
   constructor (){
     super();
     this.state = {
@@ -50,14 +50,34 @@ class App extends React.Component {
   // toggle complete/incomplete
 
   flagToggler = (todo) =>{
-    const tempDisplayArr = this.state.displayArr;
-    console.log(tempDisplayArr);
+    const tempDisplayArr = [...this.state.displayArr];
     for(let i = 0; i < tempDisplayArr.length; i++){
-      if (tempDisplayArr[i].id === todo.id){
-        tempDisplayArr[i].completed = !tempDisplayArr[i].completed;
+      if (tempDisplayArr[i]){
+        if (tempDisplayArr[i].id === todo.id){
+          tempDisplayArr[i].completed = !tempDisplayArr[i].completed;
+        }
       }
     }
     return this.setState({displayArr: tempDisplayArr});
+  }
+
+  // clear completed
+
+  clearComplete = (event) => {
+    event.preventDefault();
+    // const tempArr = [...this.state.displayArr.map(todoObj => {
+    //   if (todoObj.completed === false){
+    //     return todoObj;
+    //   }
+    // })];
+    const tempArr = [...this.state.displayArr].map(todoObj =>{
+      if(todoObj){
+        if (todoObj.completed === false){
+          return todoObj;
+        }
+      }});
+    // return this.setState({displayArr: tempArr});
+    return this.setState({displayArr: tempArr});
   }
 
   render() {
@@ -70,10 +90,14 @@ class App extends React.Component {
           inputStr = {this.state.inputStr}
           handleSubmit = {this.handleSubmit}
         />
+        {this.state.displayArr.length !== 0 ? 
         <TodoList
           todosArr = {this.state.displayArr}
           flagToggler = {this.flagToggler}
         />
+        : 'no todos yet'
+         }
+        <button onClick = {this.clearComplete}>Clear Complete</button>
       </div>
     );
   }

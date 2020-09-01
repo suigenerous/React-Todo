@@ -10,12 +10,16 @@ class TodoList extends React.Component{
         }
     }
 
+
+
     render(){
         return(
             <div>
-               {this.props.todosArr.map(todo =>{
-                   return <Todo key = {todo.id} todo = {todo} flagToggler = {this.props.flagToggler}/>
-               })}
+               {this.props.todosArr.map(todo => {
+                   if(todo){
+                    return <Todo key = {todo.id} todo = {todo} flagToggler = {this.props.flagToggler}/>
+                   }
+                })}
             </div>
         )
     }
